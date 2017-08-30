@@ -1,5 +1,7 @@
 package br.com.ifpb.visao;
 
+import br.com.ifpb.controle.Dao;
+import br.com.ifpb.controle.GenericDao;
 import br.com.ifpb.modelo.Usuario;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -7,6 +9,8 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args){
+        Dao<Usuario> usuarios = new GenericDao<>(); 
+        
         Scanner scan = new Scanner(System.in);
         System.out.println(" 1 - LOGIN ");
         System.out.println(" 2 - CADASTRA-SE");
@@ -43,6 +47,7 @@ public class App {
                     System.out.println("CONFIRMAR SENHA :");
                     String confirmaSenha = scan.next();
                     Usuario user = new Usuario(nome,email,senha, sexo,data);
+                    
                      break;
             }
             case 3 :{
