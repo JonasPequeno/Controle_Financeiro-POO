@@ -1,11 +1,12 @@
 package br.com.ifpb.modelo;
 
+import br.com.ifpb.controle.Autenticavel;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Usuario {
+public class Usuario implements Autenticavel{
     private String nome, email, senha, sexo;
     private LocalDate nascimento;
 
@@ -89,4 +90,9 @@ public class Usuario {
     public String toString() {
         return "Usuario{" + "nome=" + nome + ", email=" + email + ", senha=" + senha + ", sexo=" + sexo + ", nascimento=" + nascimento + '}';
     }   
+
+    @Override
+    public boolean autentica(String email, String senha) {
+        return email.equals(this.getEmail()) && senha.equals(this.getSenha());
+    }
 }
