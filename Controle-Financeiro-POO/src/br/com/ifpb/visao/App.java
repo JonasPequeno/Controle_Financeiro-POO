@@ -11,6 +11,7 @@ public class App {
     public static void main(String[] args){
         Dao<Usuario> usuarios = new GenericDao<>(); 
         
+        
         Scanner scan = new Scanner(System.in);
         System.out.println(" 1 - LOGIN ");
         System.out.println(" 2 - CADASTRA-SE");
@@ -26,7 +27,7 @@ public class App {
                       String email = scan.nextLine();
                       System.out.println(" SENHA :");
                       String senha = scan.nextLine();
-                                            
+                                         
                 break;
             }
             case 2 :{
@@ -47,8 +48,8 @@ public class App {
                     System.out.println("CONFIRMAR SENHA :");
                     String confirmaSenha = scan.next();
                     Usuario user = new Usuario(nome,email,senha, sexo,data);
-                    
-                     break;
+                    usuarios.create(user);                                       
+                    break;
             }
             case 3 :{
                 
