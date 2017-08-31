@@ -7,15 +7,46 @@ import java.util.List;
 import java.util.Objects;
 
 public class Usuario implements Autenticavel{
+    private static int idCont = 0;
+    private int id;
     private String nome, email, senha, sexo;
     private LocalDate nascimento;
+    private List<Transacao> transacoes;
 
     public Usuario(String nome, String email, String senha, String sexo, LocalDate nascimento) {
+        this.id = idCont++;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.sexo = sexo;
         this.nascimento = nascimento;
+        this.transacoes = new ArrayList<>();
+    }
+    
+    public boolean addTransacao(Transacao transacao){
+        return transacoes.add(transacao);
+    }
+    
+    public List<Transacao> listarTransacoes(){
+        return this.transacoes;
+    }
+    
+    public boolean editarTransacao(int pos, Transacao transacao){
+        int posReal = pos - 1; //no array a posicao inicia em zero
+        return transacoes.set(posReal, transacao) != null;
+    }
+    
+    public boolean removerTransacao(int pos){
+        int posReal = pos -1;
+        return transacoes.remove(posReal) != null;
+    }
+    
+    public int getId(){
+        return id;
+    }
+    
+    public void setId(int id){
+        this.id = id;
     }
 
     public String getNome() {
@@ -61,6 +92,7 @@ public class Usuario implements Autenticavel{
     @Override
     public int hashCode() {
         int hash = 7;
+        hash = 47 * hash + Objects.hashCode(this.id);
         hash = 47 * hash + Objects.hashCode(this.nome);
         hash = 47 * hash + Objects.hashCode(this.email);        
         hash = 47 * hash + Objects.hashCode(this.sexo);
@@ -80,7 +112,7 @@ public class Usuario implements Autenticavel{
             return false;
         }
         final Usuario other = (Usuario) obj;
-        if (!Objects.equals(this.email, other.email)) {
+        if (this.id != other.id) {
             return false;
         }
         return true;
