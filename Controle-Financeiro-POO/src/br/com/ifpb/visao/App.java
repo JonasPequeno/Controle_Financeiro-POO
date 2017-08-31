@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class App {
-    private static Scanner scan = new Scanner(System.in);
+    private static Scanner scan;
     
-    private static Dao<Usuario> usuariosDao = new GenericDao<>();
-    private static Usuario logado = null;
+    private static Dao<Usuario> usuariosDao;
+    private static Usuario logado;
        
     private static void menuLogin(){
         System.out.println(" 1 - LOGIN ");
@@ -28,11 +28,15 @@ public class App {
                 + "3. Data de nascimento\n"
                 + "4. Sexo\n"
                 + "5. Senha\n"
-                + "6. Voltar");
+                + "6. Tudo\n"
+                + "7. Voltar");
     }
     
     private static void menuPrincipal(){
-        System.out.println("Bem vindo");
+        System.out.println("Bem vindo, " + logado.getNome() + "\n1 - Cadastrar Movimentação\n"
+                                                            + "2 - Gerenciar Finanças\n"
+                                                            + "3 - Gerenciar Perfil\n"
+                                                            + "4 - Sair");
     }
     
     private static Usuario login(){
@@ -44,9 +48,9 @@ public class App {
         
         for(Usuario user : usuarios){
             if(email.equals(user.getEmail())){
-                System.out.println("Senha");
+                System.out.println("Senha:");
                 String senha = scan.next();
-                if(senha.equals(user.getSenha())){
+                if(user.autentica(email, senha)){
                     return user;
                 }
             }
@@ -114,18 +118,20 @@ public class App {
         menuAtualizaCadastro();
         int opcao = scan.nextInt();
         
-        while(opcao != 6){
+        while(opcao != 7){
             
             switch(opcao){
                 case 1:
                     System.out.println("Digite o email:");
                     String email = scan.next();
                     usuario.setEmail(email);
+                    System.out.println("Email atualizado!");
                     break;
                 case 2:
                     System.out.println("Digite o nome:");
                     String nome = scan.next();
                     usuario.setNome(nome);
+                    System.out.println("Nome atualizado!");
                     break;
                 case 3:
                     System.out.println("Digite o Data de nascimento:");
@@ -133,11 +139,13 @@ public class App {
                     DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                     LocalDate data = LocalDate.parse(nascimento, formatador);
                     usuario.setNascimento(data);
+                    System.out.println("Data de nascimento atualizada!");
                     break;
                 case 4:
                     System.out.println("Digite o sexo:");
                     String sexo = scan.next();
                     usuario.setSexo(sexo);
+                    System.out.println("Sexo atualizado!");
                     break;
                 case 5:
                     System.out.println("Digite a senha:");
@@ -145,15 +153,24 @@ public class App {
                     String confirmeSenha = scan.next();
                     if(senha.equals(confirmeSenha)){
                         usuario.setSenha(senha);
-                    }                
+                    }      
+                    System.out.println("Senha atualizada!");
                     break;
                 case 6:
-                    menuPrincipal();
+                    Usuario userUpdate = cadastraUsuario();
+                    userUpdate.setId(logado.getId());
+                    if(usuariosDao.update(userUpdate)){
+                        System.out.println("Atualização realizada com sucesso!");
+                        logado = userUpdate;
+                    }
+                    break;
+                default:
+                    System.out.println("Opção inválida!");
                     break;
             }
             
             System.out.println("1 - Fazer outra alteração\n"
-                    + "2 - Voltar");
+                                + "2 - Voltar");
             opcao = scan.nextInt();
             if(opcao == 1){
                 menuAtualizaCadastro();
@@ -165,10 +182,20 @@ public class App {
         }              
     }
     
+    private static void listarTransacoes(List<Transacao> transacoes){
+        int cont = 1;
+        for(Transacao transacao : transacoes){
+            System.out.println(cont++ + " " + transacao.toString());
+        }
+    }
+    
     
     public static void main(String[] args){
+        scan = new Scanner(System.in);
+        usuariosDao = new GenericDao<>();
+        logado = null;
         
-         boolean isFuncionando = true;
+        boolean isFuncionando = true;
 
         while(isFuncionando){
             menuLogin();
@@ -188,10 +215,13 @@ public class App {
                 case 3:
                     isFuncionando = false;
                     continue;
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
             }
 
             if(logado == null){
-                System.out.println("Email ou senha errados");
+                System.out.println("Usuário não cadastrado");
                 continue;
             }else{
                 boolean isLogado = true;
@@ -200,16 +230,46 @@ public class App {
                     opcao = scan.nextInt();
                     switch(opcao){
                         case 1:
-                            System.out.println("transacao cadastrada");
-                            continue;
+                            Transacao transacao = cadastraTransacao();
+                            if(logado.addTransacao(transacao)){
+                                System.out.println("Transação cadastrada com sucesso");
+                            }
+                            break;
                         case 2:
-                            System.out.println("gerenciar finanças");
-                            continue;
+                            List<Transacao> transacoesUserLogado = logado.listarTransacoes();
+                            System.out.println("1 - Excluir Movimentação\n"
+                                               + "2 - Editar movimentação");
+                            int op = scan.nextInt();
+                            switch(op){
+                                case 1:
+                                    System.out.println("Escolha qual transação excluir:");
+                                    listarTransacoes(transacoesUserLogado);
+                                    op = scan.nextInt();
+                                    logado.removerTransacao(op);
+                                    break;
+                                case 2:
+                                    System.out.println("Escolha qual transação editar:");
+                                    listarTransacoes(transacoesUserLogado);
+                                    op = scan.nextInt();
+                                    
+                                    logado.editarTransacao(op, cadastraTransacao());
+                                case 3:
+                                    break;
+                                default:
+                                    System.out.println("Opçao inválida!");
+                                    break;
+                            }
+                            
+                            
+                            break;
                         case 3:
-                            System.out.println("gerenciar perfil");
-                            continue;
+                            atualizarUsuario(logado, usuariosDao);
+                            break;
                         case 4:
                             isLogado = false;
+                            break;
+                        default:
+                            System.out.println("Opção inválida!");
                             break;
                     }
                 }
