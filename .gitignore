@@ -50,3 +50,5 @@ nbdist/
 
 # End of https://www.gitignore.io/api/java,linux,netbeans
 /Controle-Financeiro-POO/nbproject/private/
+/Controle-Financeiro-POO/nbproject/
+/Controle-Financeiro-POO/target/
