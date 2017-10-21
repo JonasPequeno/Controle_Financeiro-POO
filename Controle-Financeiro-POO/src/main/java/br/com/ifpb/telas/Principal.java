@@ -31,8 +31,8 @@ public class Principal extends javax.swing.JFrame {
         Corpo = new javax.swing.JDesktopPane();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
+        botaoFinacasPrincipal = new javax.swing.JToggleButton();
+        botaoPerfilPrincipal = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,11 +55,11 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jToggleButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jToggleButton1.setText("Gerenciar Finanças");
+        botaoFinacasPrincipal.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        botaoFinacasPrincipal.setText("Gerenciar Finanças");
 
-        jToggleButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jToggleButton2.setText("Gerenciar Perfil");
+        botaoPerfilPrincipal.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        botaoPerfilPrincipal.setText("Gerenciar Perfil");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -68,17 +68,17 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jButton1)
                 .addGap(20, 20, 20)
-                .addComponent(jToggleButton1)
+                .addComponent(botaoFinacasPrincipal)
                 .addGap(18, 18, 18)
-                .addComponent(jToggleButton2)
+                .addComponent(botaoPerfilPrincipal)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jButton1)
-                .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jToggleButton2))
+                .addComponent(botaoFinacasPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botaoPerfilPrincipal))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -149,9 +149,9 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane Corpo;
+    private javax.swing.JToggleButton botaoFinacasPrincipal;
+    private javax.swing.JToggleButton botaoPerfilPrincipal;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
     // End of variables declaration//GEN-END:variables
 }
