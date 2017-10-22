@@ -1,9 +1,10 @@
 package br.com.ifpb.modelo;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Transacao {
+public class Transacao implements Serializable{
     private String descricao, categoria;
     private LocalDate data;
     private double valor;
