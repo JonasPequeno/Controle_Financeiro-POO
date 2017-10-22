@@ -1,12 +1,13 @@
 package br.com.ifpb.modelo;
 
 import br.com.ifpb.controle.Autenticavel;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Usuario implements Autenticavel{
+public class Usuario implements Autenticavel, Serializable{
     private static int idCont = 0;
     private int id;
     private String nome, email, senha, sexo;

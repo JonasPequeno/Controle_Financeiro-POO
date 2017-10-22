@@ -1,9 +1,11 @@
 package br.com.ifpb.visao;
 
 import br.com.ifpb.controle.Dao;
+import br.com.ifpb.controle.GenericArquivoDao;
 import br.com.ifpb.controle.GenericDao;
 import br.com.ifpb.modelo.Transacao;
 import br.com.ifpb.modelo.Usuario;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -39,7 +41,7 @@ public class App {
                                                             + "4 - Sair");
     }
     
-    private static Usuario login(){
+    private static Usuario login() throws IOException, ClassNotFoundException{
         System.out.println("Realize seu login\n"
                 + "Email:");
         String email = scan.next();
@@ -190,7 +192,7 @@ public class App {
     }
     
     
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException, ClassNotFoundException{
         scan = new Scanner(System.in);
         usuariosDao = new GenericDao<>();
         logado = null;
