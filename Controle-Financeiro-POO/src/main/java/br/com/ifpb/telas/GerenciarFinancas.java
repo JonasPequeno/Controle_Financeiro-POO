@@ -29,22 +29,22 @@ public class GerenciarFinancas extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
+        botaoGrafico = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tabelaMovimentacoes = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jButton4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton4.setText("Grafico");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        botaoGrafico.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        botaoGrafico.setText("Grafico");
+        botaoGrafico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                botaoGraficoActionPerformed(evt);
             }
         });
 
@@ -54,7 +54,7 @@ public class GerenciarFinancas extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel9.setText("Cadastra Movimentação");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaMovimentacoes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null}
             },
@@ -62,7 +62,7 @@ public class GerenciarFinancas extends javax.swing.JFrame {
                 "Data", "Descrição", "Tipo", "Valor"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tabelaMovimentacoes);
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Data Fim :");
@@ -76,7 +76,7 @@ public class GerenciarFinancas extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(160, 160, 160)
-                        .addComponent(jButton4))
+                        .addComponent(botaoGrafico))
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -105,7 +105,7 @@ public class GerenciarFinancas extends javax.swing.JFrame {
                         .addGap(31, 31, 31)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(84, 84, 84)
-                        .addComponent(jButton4)))
+                        .addComponent(botaoGrafico)))
                 .addContainerGap(155, Short.MAX_VALUE))
         );
 
@@ -126,9 +126,9 @@ public class GerenciarFinancas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void botaoGraficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGraficoActionPerformed
 
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_botaoGraficoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,13 +166,13 @@ public class GerenciarFinancas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton botaoGrafico;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable tabelaMovimentacoes;
     // End of variables declaration//GEN-END:variables
 }
