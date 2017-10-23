@@ -13,6 +13,8 @@ public class Usuario implements Autenticavel, Serializable{
     private String nome, email, senha, sexo;
     private LocalDate nascimento;
     private List<Transacao> transacoes;
+    
+    public Usuario(){};
 
     public Usuario(String nome, String email, String senha, String sexo, LocalDate nascimento) {
         this.id = idCont++;
@@ -22,6 +24,10 @@ public class Usuario implements Autenticavel, Serializable{
         this.sexo = sexo;
         this.nascimento = nascimento;
         this.transacoes = new ArrayList<>();
+    }
+    
+    public boolean addAllTransacoes(List<Transacao> transacoes){
+        return transacoes.addAll(transacoes);
     }
     
     public boolean addTransacao(Transacao transacao){
