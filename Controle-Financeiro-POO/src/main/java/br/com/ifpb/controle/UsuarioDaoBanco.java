@@ -15,13 +15,16 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Classe usada para fazer a persitência de usuario no banco de dados.
  * @author aguirre
  */
 public class UsuarioDaoBanco implements Dao<Usuario> {
     
     private Connection con;
     
+    /**
+     * Construtor default da classe. Ao ser chamado, ele tenta realizar a conexão com o banco de dados.
+     */
     public UsuarioDaoBanco(){
         try {
             con = new ConFactory().getConnection();
@@ -32,7 +35,15 @@ public class UsuarioDaoBanco implements Dao<Usuario> {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    
+    /**
+     * Salva um usuário no banco de dados.
+     * @param o Usuário que será salvo.
+     * @return True caso a operação seja realizada com sucesso e False no caso contrário.
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     @Override
     public boolean create(Usuario o) throws IOException, ClassNotFoundException, SQLException {
         PreparedStatement stmt = con.prepareStatement("INSERT INTO usuario(id, nome, email, senha, sexo, nascimento)"
@@ -47,7 +58,14 @@ public class UsuarioDaoBanco implements Dao<Usuario> {
         
         return stmt.executeUpdate() > 0;
     }
-
+    
+    /**
+     * Lista todos os usuários salvos no banco.
+     * @return Todos os usuários salvos.
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     @Override
     public List<Usuario> read() throws IOException, ClassNotFoundException, SQLException {
         List<Usuario> usuarios = new ArrayList<>();
@@ -70,7 +88,15 @@ public class UsuarioDaoBanco implements Dao<Usuario> {
         
         return usuarios;
     }
-
+    
+    /**
+     * Atualiza um usuário do banco.
+     * @param o Usuário que terá suas informações atualizadas.
+     * @return True caso a operação seja realizada com sucesso e False no caso contrário.
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     @Override
     public boolean update(Usuario o) throws IOException, ClassNotFoundException, SQLException {
         PreparedStatement stmt =  con.prepareStatement("UPDATE usuario SET Nome = ?, Email = ?, Senha = ?, Sexo = ?, Nascimento = ? WHERE id = ?");
@@ -84,7 +110,15 @@ public class UsuarioDaoBanco implements Dao<Usuario> {
         
         return stmt.executeUpdate() > 0;
     }
-
+    
+    /**
+     * Deleta algum usuário do banco.
+     * @param o Usuário que deve ser deletado.
+     * @return True caso a operação seja realizada com sucesso e False no caso contrário.
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @throws SQLException 
+     */
     @Override
     public boolean delete(Usuario o) throws IOException, ClassNotFoundException, SQLException {
         PreparedStatement stmt = con.prepareStatement("DELETE FROM usuario u WHERE u.id = ?");
@@ -94,6 +128,12 @@ public class UsuarioDaoBanco implements Dao<Usuario> {
         return stmt.executeUpdate() > 0;
     }
     
+    /**
+     * Método privado da classe que permite recuperar todas as transações de um usuário a partir do seu id.
+     * @param id ID do usuário para o qual devem ser recuperadas suas transações.
+     * @return A lista de transações do usuário.
+     * @throws SQLException 
+     */
     private List<Transacao> getTransacoesUsuario(int id) throws SQLException{
         List<Transacao> transacoes = new ArrayList<>();
         
