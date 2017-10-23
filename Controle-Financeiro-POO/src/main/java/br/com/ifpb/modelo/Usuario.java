@@ -16,6 +16,14 @@ public class Usuario implements Autenticavel, Serializable{
     
     public Usuario(){};
 
+/**
+ * Construtor de Usuario.
+ * @param nome String - nome do usuario.
+ * @param email String - email do usuario.
+ * @param senha String - senha do usuario.
+ * @param sexo String - sexo do usuario.
+ * @param nascimento LocalDate - data de nascimento do usuario.
+ */
     public Usuario(String nome, String email, String senha, String sexo, LocalDate nascimento) {
         this.id = idCont++;
         this.nome = nome;
@@ -30,19 +38,36 @@ public class Usuario implements Autenticavel, Serializable{
         return transacoes.addAll(transacoes);
     }
     
+   /**
+    * Método addTransacao - adiciona uma nova transação na lista.
+    * @param transacao - instância da classe transacao.
+    * @return boolean 
+    */
     public boolean addTransacao(Transacao transacao){
         return transacoes.add(transacao);
     }
-    
+    /**
+     * Método List - lista as transações 
+     * @return Lista de transações.
+     */     
     public List<Transacao> listarTransacoes(){
         return this.transacoes;
     }
-    
+    /**
+     * 
+     * @param pos int - posição da lista.
+     * @param transacao - instância da classe transacao.
+     * @return boolean
+     */
     public boolean editarTransacao(int pos, Transacao transacao){
         int posReal = pos - 1; //no array a posicao inicia em zero
         return transacoes.set(posReal, transacao) != null;
     }
-    
+    /**
+     * Método para remover uma transação.
+     * @param pos int - posição da lista.
+     * @return  retorna a transação removida da lista.
+     */
     public boolean removerTransacao(int pos){
         int posReal = pos -1;
         return transacoes.remove(posReal) != null;

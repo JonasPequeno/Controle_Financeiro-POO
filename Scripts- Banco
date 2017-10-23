@@ -1,0 +1,23 @@
+CREATE TABLE USUARIO(
+    id int,
+    nome varchar(100) NOT NULL,
+    email varchar(50) NOT NULL,
+    senha varchar(50) NOT NULL,
+    sexo varchar(20) NOT NULL,
+    nascimento date NOT NULL,
+    
+    CONSTRAINT PK_ID PRIMARY KEY(id)
+);
+
+CREATE TABLE TRANSACAO(
+    id SERIAL, 
+    idUsuario int,
+    descricao varchar(200),
+    categoria varchar(50) NOT NULL,
+    data date NOT NULL,
+    valor float,
+    tipo boolean,
+    
+    CONSTRAINT pk_substitutaId PRIMARY KEY(ID),
+    CONSTRAINT FK_IdUsuario FOREIGN KEY(idUsuario) REFERENCES usuario(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
