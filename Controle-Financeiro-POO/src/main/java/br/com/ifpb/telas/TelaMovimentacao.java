@@ -82,7 +82,7 @@ public class TelaMovimentacao extends javax.swing.JFrame {
         jLabel3.setText("Tipo");
 
         tipoMovimentacao.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        tipoMovimentacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Feminino" }));
+        tipoMovimentacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Entrada", "Saida" }));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Categoria");
@@ -100,7 +100,7 @@ public class TelaMovimentacao extends javax.swing.JFrame {
         });
 
         categoriaMovimentacao.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        categoriaMovimentacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Feminino" }));
+        categoriaMovimentacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Serviços", "produtos", "Casa", "Restaturante" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

@@ -229,8 +229,8 @@
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="2">
-                    <StringItem index="0" value="Masculino"/>
-                    <StringItem index="1" value="Feminino"/>
+                    <StringItem index="0" value="Entrada"/>
+                    <StringItem index="1" value="Saida"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -270,9 +270,11 @@
                   <Font name="Dialog" size="14" style="1"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="2">
-                    <StringItem index="0" value="Masculino"/>
-                    <StringItem index="1" value="Feminino"/>
+                  <StringArray count="4">
+                    <StringItem index="0" value="Servi&#xe7;os"/>
+                    <StringItem index="1" value="produtos"/>
+                    <StringItem index="2" value="Casa"/>
+                    <StringItem index="3" value="Restaturante"/>
                   </StringArray>
                 </Property>
               </Properties>
