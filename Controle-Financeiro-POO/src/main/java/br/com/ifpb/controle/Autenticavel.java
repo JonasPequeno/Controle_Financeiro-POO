@@ -1,7 +1,8 @@
 package br.com.ifpb.controle;
 /**
- * Interface autenticavel
- *
+ * Interface autilizada para realizar a autenticação de usuários
+ * utilizando seu email e senha.
+ * @author Aguirre e Jonas
  */
 public interface Autenticavel {
     /**
