@@ -15,7 +15,6 @@ public class Usuario implements Autenticavel, Serializable{
     private List<Transacao> transacoes;
     
     public Usuario(){};
-
 /**
  * Construtor de Usuario.
  * @param nome String - nome do usuario.
@@ -33,11 +32,12 @@ public class Usuario implements Autenticavel, Serializable{
         this.nascimento = nascimento;
         this.transacoes = new ArrayList<>();
     }
+
     
     public boolean addAllTransacoes(List<Transacao> transacoes){
         return transacoes.addAll(transacoes);
     }
-    
+
    /**
     * Método addTransacao - adiciona uma nova transação na lista.
     * @param transacao - instância da classe transacao.

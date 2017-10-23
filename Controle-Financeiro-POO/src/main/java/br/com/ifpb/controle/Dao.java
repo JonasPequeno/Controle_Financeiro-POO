@@ -18,6 +18,7 @@ public interface Dao <T> {
      * @throws ClassNotFoundException 
      */
     public boolean create(T o) throws IOException, ClassNotFoundException, SQLException;
+
     /**
      *  Método List , faz a listagem de todos os elementos.
      * @return boolean
@@ -25,16 +26,19 @@ public interface Dao <T> {
      * @throws ClassNotFoundException 
      */
     public List<T> read() throws IOException, ClassNotFoundException, SQLException;
+
     /**
      * Método update , atualiza um elemento da lista.
      * @param o 
      * @return boolean 
      */
     public boolean update(T o) throws IOException, ClassNotFoundException, SQLException;
+
     /**
      * Método delete , deleta um elemento da lista.
      * @param o
      * @return boolean
      */
     public boolean delete(T o) throws IOException, ClassNotFoundException, SQLException;
+
 }
