@@ -7,6 +7,7 @@ package br.com.ifpb.controle;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -41,10 +42,7 @@ public class GenericArquivoDao<T> implements Dao<T>{
         List<T> elementos = this.read();
         
         if(elementos.add(o)){
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(arquivo));
-            oos.writeObject(elementos);
-            
-            oos.close();
+            this.escreverNoArquivo(elementos);
             return true;
         }
         return false;
@@ -56,23 +54,54 @@ public class GenericArquivoDao<T> implements Dao<T>{
         List<T> elementos = null;
         
         if(arquivo.length() > 0){
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(arquivo));
             
-            elementos = (ArrayList<T>) ois.readObject();
-            ois.close();
+            elementos = (ArrayList<T>) this.lerDoArquivo();
         }
         
         return elementos;
     }
 
     @Override
-    public boolean update(T o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean update(T o) throws IOException, ClassNotFoundException{
+        List<T> elementos = this.read();
+        
+        if(elementos.contains(o)){
+           for(int i = 0; i < elementos.size(); i++){
+               if(elementos.get(i).equals(o)){
+                    elementos.remove(i);
+                    elementos.add(i, o);
+                    this.escreverNoArquivo(elementos);
+                    return true;
+                }
+            }
+       }
+        return false;        
     }
 
     @Override
-    public boolean delete(T o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean delete(T o) throws IOException, ClassNotFoundException{
+        List<T> elementos = this.read();
+        if(elementos.remove(o)){
+            this.escreverNoArquivo(elementos);
+            return true;
+        }
+        return false;
+    }
+    
+    private void escreverNoArquivo(Object o) throws IOException{
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(arquivo));
+        oos.writeObject(o);
+            
+        oos.close();
+    }
+    
+    private Object lerDoArquivo() throws FileNotFoundException, IOException, ClassNotFoundException{
+       ObjectInputStream ois = new ObjectInputStream(new FileInputStream(arquivo));
+       
+       Object obj = ois.readObject();
+       ois.close();
+       
+       return obj;        
     }
     
 }
