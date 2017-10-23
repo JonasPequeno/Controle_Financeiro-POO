@@ -30,8 +30,29 @@ public class Usuario implements Autenticavel, Serializable{
      * @param sexo String - sexo do usuario.
      * @param nascimento LocalDate - data de nascimento do usuario.
      */
-    public Usuario(String nome, String email, String senha, String sexo, LocalDate nascimento) {
+    public Usuario(String nome, String email, String senha, String sexo, LocalDate nascimento) throws IllegalArgumentException{
         this.id = idCont++;
+        if(nome == null || nome.split(" ").length == 0){
+            throw new IllegalArgumentException("O nome do usuário não foi informado!");
+        }
+        if(email == null || email.split(" ").length == 0){
+            throw new IllegalArgumentException("Email não foi informado!");
+        }
+        if(!this.validaEmail(email)){
+            throw new IllegalArgumentException("Email inválido!");
+        }
+        if(senha == null || senha.split(" ").length == 0){
+            throw new IllegalArgumentException("A senha não foi informada!");
+        }
+        if( senha.split(" ").length < 5){
+            throw new IllegalArgumentException("A senha deve possuir pelo menos cinco caracteres!");
+        }
+        if(sexo == null || sexo.split(" ").length == 0){
+            throw new IllegalArgumentException("O sexo não foi informado!");
+        }
+        if(nascimento == null){
+            throw new IllegalArgumentException("A data de nascimento não foi informada!");
+        }
         this.nome = nome;
         this.email = email;
         this.senha = senha;
@@ -113,6 +134,9 @@ public class Usuario implements Autenticavel, Serializable{
      * @param nome Novo nome.
      */
     public void setNome(String nome) {
+        if(nome == null || nome.split(" ").length == 0){
+            throw new IllegalArgumentException("O nome do usuário não foi informado!");
+        }
         this.nome = nome;
     }
 
@@ -129,6 +153,12 @@ public class Usuario implements Autenticavel, Serializable{
      * @param email Novo email.
      */
     public void setEmail(String email) {
+        if(email == null || email.split(" ").length == 0){
+            throw new IllegalArgumentException("Email não foi informado!");
+        }
+        if(!this.validaEmail(email)){
+            throw new IllegalArgumentException("Email inválido!");
+        }
         this.email = email;
     }
 
@@ -145,6 +175,12 @@ public class Usuario implements Autenticavel, Serializable{
      * @param senha Nova senha.
      */
     public void setSenha(String senha) {
+        if(senha == null || senha.split(" ").length == 0){
+            throw new IllegalArgumentException("A senha não foi informada!");
+        }
+        if( senha.split(" ").length < 5){
+            throw new IllegalArgumentException("A senha deve possuir pelo menos cinco caracteres!");
+        }
         this.senha = senha;
     }
 
@@ -161,6 +197,9 @@ public class Usuario implements Autenticavel, Serializable{
      * @param sexo Novo sexo.
      */
     public void setSexo(String sexo) {
+        if(sexo == null || sexo.split(" ").length == 0){
+            throw new IllegalArgumentException("O sexo não foi informado!");
+        }
         this.sexo = sexo;
     }
 
@@ -177,6 +216,9 @@ public class Usuario implements Autenticavel, Serializable{
      * @param nascimento Nova data de nascimento.
      */
     public void setNascimento(LocalDate nascimento) {
+        if(nascimento == null){
+            throw new IllegalArgumentException("A data de nascimento não foi informada!");
+        }
         this.nascimento = nascimento;
     }
 
@@ -223,5 +265,9 @@ public class Usuario implements Autenticavel, Serializable{
     @Override
     public boolean autentica(String email, String senha) {
         return email.equals(this.getEmail()) && senha.equals(this.getSenha());
+    }
+    
+    private boolean validaEmail(String email){
+        return email.matches("[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})");
     }
 }

@@ -27,7 +27,19 @@ public class Transacao implements Serializable{
      *              False: se for uma SAIDA.
      */
 
-    public Transacao(String descricao, String categoria, LocalDate data, double valor, boolean tipo) {
+    public Transacao(String descricao, String categoria, LocalDate data, double valor, boolean tipo) throws IllegalArgumentException {
+        if(descricao == null || descricao.split(" ").length == 0){
+            throw new IllegalArgumentException("A descrição não foi informada");
+        }
+        if(categoria == null || categoria.split(" ").length == 0){
+            throw new IllegalArgumentException("A categoria não foi informada!");
+        }
+        if(data == null){
+            throw new IllegalArgumentException("A data da transação não foi informada!");
+        }
+        if(valor < 0){
+            throw new IllegalArgumentException("Não é permitido inserir um valor negativo!");
+        }
         this.descricao = descricao;
         this.categoria = categoria;
         this.data = data;
@@ -54,6 +66,9 @@ public class Transacao implements Serializable{
      * @param descricao Nova descrição.
      */
     public void setDescricao(String descricao) {
+        if(descricao == null || descricao.split(" ").length == 0){
+            throw new IllegalArgumentException("A descrição não foi informada");
+        }
         this.descricao = descricao;
     }
 
@@ -70,6 +85,9 @@ public class Transacao implements Serializable{
      * @param categoria Nova categoria.
      */
     public void setCategoria(String categoria) {
+        if(categoria == null || categoria.split(" ").length == 0){
+            throw new IllegalArgumentException("A categoria não foi informada!");
+        }
         this.categoria = categoria;
     }
 
@@ -86,6 +104,9 @@ public class Transacao implements Serializable{
      * @param data Nova data.
      */
     public void setData(LocalDate data) {
+        if(data == null){
+            throw new IllegalArgumentException("A data da transação não foi informada!");
+        }
         this.data = data;
     }
 
@@ -102,6 +123,9 @@ public class Transacao implements Serializable{
      * @param valor Novo valor.
      */
     public void setValor(double valor) {
+        if(valor < 0){
+            throw new IllegalArgumentException("Não é permitido inserir um valor negativo!");
+        }
         this.valor = valor;
     }
 

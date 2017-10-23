@@ -9,6 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  * Classe usada para realizar as operações de CRUD, utilizando persistência em arquivos.
@@ -25,7 +26,7 @@ public class GenericArquivoDao<T> implements Dao<T>{
      * Cria um diretório com o arquivo utilizado para a persistência na pasta raíz do projeto caso não existam.
      * @throws IOException 
      */
-    public GenericArquivoDao() throws IOException{
+    public GenericArquivoDao(){
         dir = new File("data");
         arquivo = new File("data/controle-transacoes.bin");
         
@@ -34,7 +35,14 @@ public class GenericArquivoDao<T> implements Dao<T>{
         }
         
         if(!arquivo.exists()){
-            arquivo.createNewFile();
+            try {
+                arquivo.createNewFile();
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null,
+                    "Falha ao tentar criar o arquivo",
+                    "Mensagem de Erro",
+                    JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
     /**
