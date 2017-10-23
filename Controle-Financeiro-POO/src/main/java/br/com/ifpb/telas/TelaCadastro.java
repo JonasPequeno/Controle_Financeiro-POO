@@ -6,16 +6,29 @@
 
 package br.com.ifpb.telas;
 
+import br.com.ifpb.controle.Dao;
+import br.com.ifpb.controle.GenericArquivoDao;
+import br.com.ifpb.controle.UsuarioDaoBanco;
+import br.com.ifpb.modelo.Usuario;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author jonas
  */
 public class TelaCadastro extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form TelaCadastro
      */
     public TelaCadastro() {
+        inicializarComponentes();
+        
         initComponents();
     }
 
@@ -95,6 +108,11 @@ public class TelaCadastro extends javax.swing.JFrame {
 
         sexoCadastro.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         sexoCadastro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Feminino" }));
+        sexoCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sexoCadastroActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Senha");
@@ -214,12 +232,44 @@ public class TelaCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_emailCadastroActionPerformed
 
     private void botaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastrarActionPerformed
-        // TODO add your handling code here:
+        String nome = nomeCadastro.getText();
+        String email = emailCadastro.getText();
+        String senha = senhaCadastro.getSelectedText();
+        String sexo = (String) sexoCadastro.getSelectedItem();
+        LocalDate nascimento = LocalDate.now();
+        
+        Usuario u = new Usuario(nome, email, senha, sexo, nascimento);
+        try {
+            if(TelaLogin.getDao().create(u)){
+                JOptionPane.showMessageDialog(this, "Usuário cadastrado", "Confirmação", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null,
+                    "Falha ao tentar salvar o usuário",
+                    "Mensagem de Erro",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null,
+                    "Falha ao tentar salvar o usuário",
+                    "Mensagem de Erro",
+                    JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,
+                    "Falha ao tentar salvar o usuário",
+                    "Mensagem de Erro",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
     }//GEN-LAST:event_botaoCadastrarActionPerformed
 
     private void botaoLimparCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLimparCadastroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botaoLimparCadastroActionPerformed
+
+    private void sexoCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sexoCadastroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sexoCadastroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -254,6 +304,14 @@ public class TelaCadastro extends javax.swing.JFrame {
                 new TelaCadastro().setVisible(true);
             }
         });
+    }
+    
+    private void inicializarComponentes(){
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setSize(400, 400);
+        setResizable(false);
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
