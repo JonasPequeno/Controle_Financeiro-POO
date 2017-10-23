@@ -37,7 +37,7 @@ public class GenericArquivoDao<T> implements Dao<T>{
     }
 
     @Override
-    public boolean create(T o) throws IOException, ClassNotFoundException{
+       public boolean create(T o) throws IOException, ClassNotFoundException{
         List<T> elementos = this.read();
         
         if(elementos.add(o)){

@@ -11,6 +11,15 @@ public class Transacao implements Serializable{
     private boolean tipo;
     private final boolean ENTRADA;
     private final boolean SAIDA;
+    
+    /**
+     * Construtor de Transação
+     * @param descricao String
+     * @param categoria String
+     * @param data LocalDate
+     * @param valor Double 
+     * @param tipo boolean
+     */
 
     public Transacao(String descricao, String categoria, LocalDate data, double valor, boolean tipo) {
         this.descricao = descricao;
